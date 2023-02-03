@@ -20,6 +20,11 @@ public class SalariedEmployee extends StaffMember{
 
 
     @Override
+    public double getSalary() {
+        return salary;
+    }
+
+    @Override
     public String toString() {
         return "ID: " + this.id + " Name: " + this.name + " Address: " + this.address + " Bonus: " + this.bonus;
     }

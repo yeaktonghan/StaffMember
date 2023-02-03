@@ -17,6 +17,11 @@ public class HourlySalaryEmployee extends StaffMember{
     }
 
     @Override
+    public double getSalary() {
+        return 0;
+    }
+
+    @Override
     public String toString() {
         return "ID: " + this.id + " Name: " + this.name + " Address: " + this.address + " Hour Worked: " + this.hourWorked + " Rate: " + this.rate;
     }

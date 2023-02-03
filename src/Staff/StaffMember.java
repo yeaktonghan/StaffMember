@@ -6,6 +6,21 @@ public abstract class StaffMember {
     protected String name;
     protected String address;
 
+    abstract public double getSalary();
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+    Volunteer volunteer;
+
     public StaffMember(int id, String name, String address){
         this.id = id;
         this.name = name;
@@ -18,4 +33,5 @@ public abstract class StaffMember {
     }
 
     abstract void pay(double salary);
+
 }
