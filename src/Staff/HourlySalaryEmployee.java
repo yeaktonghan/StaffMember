@@ -5,8 +5,10 @@ public class HourlySalaryEmployee extends StaffMember{
     private double rate;
 
 
-    public HourlySalaryEmployee(int id, String name, String address) {
+    public HourlySalaryEmployee(int id, String name, String address, int hourWorked, double rate) {
         super(id, name, address);
+        this.hourWorked = hourWorked;
+        this.rate = rate;
     }
 
     @Override

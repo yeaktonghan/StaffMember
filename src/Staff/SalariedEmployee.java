@@ -6,9 +6,10 @@ public class SalariedEmployee extends StaffMember{
 
 
 
-    public SalariedEmployee(int id, String name, String address, double bonus) {
+    public SalariedEmployee(int id, String name, String address, double bonus, double salary) {
         super(id, name, address);
         this.bonus = bonus;
+        this.salary = salary;
     }
 
 
