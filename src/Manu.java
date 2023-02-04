@@ -281,7 +281,7 @@ public class Manu {
                             table.addCell("-----", numberStyle);
                             table.addCell("-----", numberStyle);
                             table.addCell("-----", numberStyle);
-                            table.addCell(Double.toString(volunteer.getSalary()), numberStyle);
+                            table.addCell(Double.toString(volunteer.pay()), numberStyle);
                         } else if (staffMembers.get(i).getClass().toString().equals("class Staff.HourlySalaryEmployee")) {
                             HourlySalaryEmployee hourlySalaryEmployee = (HourlySalaryEmployee) staffMembers.get(i);
                             table.addCell(staffMembers.get(i).getClass().getSimpleName(), numberStyle);
@@ -292,7 +292,7 @@ public class Manu {
                             table.addCell("-----", numberStyle);
                             table.addCell(Integer.toString(hourlySalaryEmployee.getHourWorked()), numberStyle);
                             table.addCell(Double.toString(hourlySalaryEmployee.getRate()), numberStyle);
-                            table.addCell(Double.toString(hourlySalaryEmployee.getHourWorked()*hourlySalaryEmployee.getRate()), numberStyle);
+                            table.addCell(Double.toString(hourlySalaryEmployee.pay()), numberStyle);
                         }
                         else if (staffMembers.get(i).getClass().toString().equals("class Staff.SalariedEmployee")) {
                             SalariedEmployee salariedEmployee = (SalariedEmployee) staffMembers.get(i);
@@ -304,7 +304,7 @@ public class Manu {
                             table.addCell(Double.toString(salariedEmployee.getBonus()), numberStyle);
                             table.addCell("-----", numberStyle);
                             table.addCell("-----", numberStyle);
-                            table.addCell(Double.toString(salariedEmployee.getBonus()+salariedEmployee.getSalary()), numberStyle);
+                            table.addCell(Double.toString(salariedEmployee.pay()), numberStyle);
                         }
                     } else {
                         table.addCell("No Record to Show here", numberStyle, (9));

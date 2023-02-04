@@ -38,7 +38,9 @@ public abstract class StaffMember {
         return "ID: " + this.id + " Name: " + this.name + " Address: " + this.address;
     }
 
-    abstract void pay(double salary);
+    public double pay() {
+        return 0;
+    }
 
     abstract void setName(String name);
 

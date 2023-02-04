@@ -28,8 +28,8 @@ public class HourlySalaryEmployee extends StaffMember {
     }
 
     @Override
-    void pay(double salary) {
-
+    public double pay() {
+        return this.hourWorked*this.rate;
     }
 
     @Override

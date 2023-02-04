@@ -13,8 +13,8 @@ public class SalariedEmployee extends StaffMember {
 
 
     @Override
-    void pay(double salary) {
-        this.salary = salary;
+    public double pay() {
+        return this.salary+this.bonus;
     }
 
     @Override
