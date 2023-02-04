@@ -40,7 +40,6 @@ public class Manu {
                 System.out.println("5) Exit");
                 System.out.print("=> Please choose your action: ");
                 int input = scanner.nextInt();
-                scanner.nextLine();
                 if (input >= 1 && input <= 5) {
                     switch (input) {
                         case 1 -> insertEmployee();
@@ -50,12 +49,11 @@ public class Manu {
                         case 5 -> exit();
                     }
                 } else {
-                    System.out.println("Please only enter number between 1 <=> 5: !!!");
-//                    mainMenu();
+                    System.err.println("Please only enter number between 1 <=> 5: !!!");
                 }
             } catch (InputMismatchException ime) {
+                scanner.nextLine();
                 System.out.println("Please only enter number between 1 <=> 5 !!!");
-//                mainMenu();
             }
         }
     }
@@ -120,7 +118,7 @@ public class Manu {
                                     SalariedEmployee salariedEmployee = new SalariedEmployee(currentId, name, address, bonus, salary);
                                     staffMembers.add(salariedEmployee);
                                     salariedEmployee = (SalariedEmployee) staffMembers.get(currentId - 1);
-                                    System.out.println("Volunteer ID : " + salariedEmployee.getId() + " Name : " + salariedEmployee.getName() + " Address : " + salariedEmployee.getAddress() + "Bonus : " + salariedEmployee.getBonus() + " Salary : " + salariedEmployee.getSalary());
+                                    System.out.println("Salaried Employee ID : " + salariedEmployee.getId() + " Name : " + salariedEmployee.getName() + " Address : " + salariedEmployee.getAddress() + "  Bonus : " + salariedEmployee.getBonus() + " Salary : " + salariedEmployee.getSalary());
                                     System.out.println("\n");
                                     currentId++;
                                     break outer_switch;
@@ -147,7 +145,7 @@ public class Manu {
                                     double rate = scanner.nextDouble();
                                     HourlySalaryEmployee hourlySalaryEmployee = new HourlySalaryEmployee(currentId, name, address, hourWorked, rate);
                                     staffMembers.add(hourlySalaryEmployee);
-                                    System.out.println("Volunteer ID : " + ((HourlySalaryEmployee) staffMembers.get(currentId - 1)).getId() + " Name : " + ((HourlySalaryEmployee) staffMembers.get(currentId - 1)).getName() + " Address : " + ((HourlySalaryEmployee) staffMembers.get(currentId - 1)).getAddress() + " Hour Worked : " + ((HourlySalaryEmployee) staffMembers.get(currentId - 1)).getHourWorked() + " Rate : " + ((HourlySalaryEmployee) staffMembers.get(currentId)).getRate());
+                                    System.out.println("Hourly Employee ID : " + ((HourlySalaryEmployee) staffMembers.get(currentId - 1)).getId() + " Name : " + ((HourlySalaryEmployee) staffMembers.get(currentId - 1)).getName() + " Address : " + ((HourlySalaryEmployee) staffMembers.get(currentId - 1)).getAddress() + " Hour Worked : " + ((HourlySalaryEmployee) staffMembers.get(currentId - 1)).getHourWorked() + " Rate : " + ((HourlySalaryEmployee) staffMembers.get(currentId - 1)).getRate());
                                     System.out.println("\n");
                                     currentId++;
                                     break outer_switch;
@@ -157,7 +155,6 @@ public class Manu {
                                     // time wasted on this clear buffer : 6 min
                                     scanner.nextLine();
                                 }
-                                System.out.println("New volunteer added successfully!!!");
                             }
                         case 4:
                             break outer_while_loop;
@@ -167,6 +164,7 @@ public class Manu {
 //                    mainMenu();
                 }
             } catch (InputMismatchException ime) {
+                scanner.nextLine();
                 System.out.println("Please only enter number between 1 <=> 5 !!!");
 //                mainMenu();
             }
@@ -234,8 +232,9 @@ public class Manu {
                     System.err.println("This ID either have no index or out of range!!!");
                 }
             } catch (Exception e) {
-                System.err.println(e.getMessage());
                 scanner.nextLine();
+                System.err.println(e.getMessage());
+
             }
         }
     }
@@ -250,16 +249,16 @@ public class Manu {
         do {
             CellStyle numberStyle = new CellStyle(CellStyle.HorizontalAlign.center);
             Table table = new Table(9, BorderStyle.UNICODE_BOX_DOUBLE_BORDER, ShownBorders.ALL);
-            table.setColumnWidth(0, 3, 5);
-            table.setColumnWidth(1, 20, 26);
+            table.setColumnWidth(0, 25, 5);
+            table.setColumnWidth(1, 4, 26);
             table.setColumnWidth(2, 30, 26);
-            table.setColumnWidth(3, 20, 26);
-            table.setColumnWidth(4, 10, 26);
-            table.setColumnWidth(1, 20, 26);
-            table.setColumnWidth(2, 30, 26);
-            table.setColumnWidth(3, 20, 26);
-            table.setColumnWidth(4, 10, 26);
-            table.addCell(" Display Employee", numberStyle, (5));
+            table.setColumnWidth(3, 22, 26);
+            table.setColumnWidth(4, 15, 26);
+            table.setColumnWidth(5, 15, 26);
+            table.setColumnWidth(6, 15, 26);
+            table.setColumnWidth(7, 15, 26);
+            table.setColumnWidth(8, 15, 26);
+            table.addCell(" Display Employee", numberStyle, (9));
             table.addCell("Type", numberStyle);
             table.addCell("ID", numberStyle);
             table.addCell("Name", numberStyle);
@@ -283,15 +282,38 @@ public class Manu {
                             table.addCell("-----", numberStyle);
                             table.addCell("-----", numberStyle);
                             table.addCell(Double.toString(volunteer.getSalary()), numberStyle);
+                        } else if (staffMembers.get(i).getClass().toString().equals("class Staff.HourlySalaryEmployee")) {
+                            HourlySalaryEmployee hourlySalaryEmployee = (HourlySalaryEmployee) staffMembers.get(i);
+                            table.addCell(staffMembers.get(i).getClass().getSimpleName(), numberStyle);
+                            table.addCell(Integer.toString(hourlySalaryEmployee.getId()), numberStyle);
+                            table.addCell(hourlySalaryEmployee.getName(), numberStyle);
+                            table.addCell(hourlySalaryEmployee.getAddress(), numberStyle);
+                            table.addCell("-----", numberStyle);
+                            table.addCell("-----", numberStyle);
+                            table.addCell(Integer.toString(hourlySalaryEmployee.getHourWorked()), numberStyle);
+                            table.addCell(Double.toString(hourlySalaryEmployee.getRate()), numberStyle);
+                            table.addCell(Double.toString(hourlySalaryEmployee.getHourWorked()*hourlySalaryEmployee.getRate()), numberStyle);
+                        }
+                        else if (staffMembers.get(i).getClass().toString().equals("class Staff.SalariedEmployee")) {
+                            SalariedEmployee salariedEmployee = (SalariedEmployee) staffMembers.get(i);
+                            table.addCell(staffMembers.get(i).getClass().getSimpleName(), numberStyle);
+                            table.addCell(Integer.toString(salariedEmployee.getId()), numberStyle);
+                            table.addCell(salariedEmployee.getName(), numberStyle);
+                            table.addCell(salariedEmployee.getAddress(), numberStyle);
+                            table.addCell(Double.toString(salariedEmployee.getSalary()), numberStyle);
+                            table.addCell(Double.toString(salariedEmployee.getBonus()), numberStyle);
+                            table.addCell("-----", numberStyle);
+                            table.addCell("-----", numberStyle);
+                            table.addCell(Double.toString(salariedEmployee.getBonus()+salariedEmployee.getSalary()), numberStyle);
                         }
                     } else {
-                        table.addCell("No Record to Show here", numberStyle, (5));
+                        table.addCell("No Record to Show here", numberStyle, (9));
                         break;
                     }
                 }
                 System.out.println(table.render());
             } else {
-                table.addCell("No Record to Show here", numberStyle, (5));
+                table.addCell("No Record to Show here", numberStyle, (9));
                 System.out.println(table.render());
             }
             System.out.println("1) First Page     2) Next Page     3) Previous     4) Last Page     5) Change display row     6) Go to Main Menu");
@@ -345,14 +367,12 @@ public class Manu {
                         break;
                     }
                 case 4: // Last page
-                    System.out.println(staffMembers.size());
-                    System.out.println(totalPage);
+                    System.out.println("Total Page: " + totalPage);
                     if (totalPage == 1 || totalPage == 0) {
                         System.out.println("There's no page 2");
                         break;
                     } else {
                         int placeHolder = staffMembers.size() - (staffMembers.size() % defaultRow);
-                        System.out.println("Place Holder: " + placeHolder);
                         startPosition = placeHolder;
                         row = startPosition + row;
                         break;
@@ -406,7 +426,23 @@ public class Manu {
     }
 
     public static void exit() {
-        System.exit(1);
+        System.out.println("(.づ◡﹏◡)づ. ( T⌓T) PAGINATION AGAIN??? (╥_╥) ( ɵ̥̥ ﹏ ɵ̥̥)");
+        System.out.println("( ಥ _ಥ) Good Bye! ( ಥ _ಥ)");
+        // Loading animation
+        char[] animationChars = new char[]{'|', '/', '-', '\\'};
+        for (int i = 0; i <= 5; i++) {
+            // JUST ANIMATION, NOT IMPORTANT
+
+            System.out.print("Exiting Program: " + animationChars[i % 4] + "\r");
+
+            try {
+                Thread.sleep(200);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        System.exit(0);
     }
 
     public static int findIndexOfId(int id) {
