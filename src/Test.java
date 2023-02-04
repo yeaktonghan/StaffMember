@@ -26,6 +26,7 @@ public class Test {
                 System.out.println("Index of 6 is : " + indexCount);
             }
         }
+        System.out.println(staffMembers.get(1).getClass().getSimpleName());
 
 //        for ()
 

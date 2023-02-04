@@ -2,6 +2,10 @@ import Staff.HourlySalaryEmployee;
 import Staff.SalariedEmployee;
 import Staff.StaffMember;
 import Staff.Volunteer;
+import org.nocrala.tools.texttablefmt.Table;
+import org.nocrala.tools.texttablefmt.BorderStyle;
+import org.nocrala.tools.texttablefmt.ShownBorders;
+import org.nocrala.tools.texttablefmt.CellStyle;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -9,6 +13,8 @@ import java.util.Scanner;
 
 public class Manu {
 
+    static int row = 5;
+    static int defaultRow = 5;
     static int currentId = 4;
 
     static ArrayList<StaffMember> staffMembers = new ArrayList<>();
@@ -113,7 +119,7 @@ public class Manu {
                                     double bonus = scanner.nextDouble();
                                     SalariedEmployee salariedEmployee = new SalariedEmployee(currentId, name, address, bonus, salary);
                                     staffMembers.add(salariedEmployee);
-                                    salariedEmployee = (SalariedEmployee) staffMembers.get(currentId -1);
+                                    salariedEmployee = (SalariedEmployee) staffMembers.get(currentId - 1);
                                     System.out.println("Volunteer ID : " + salariedEmployee.getId() + " Name : " + salariedEmployee.getName() + " Address : " + salariedEmployee.getAddress() + "Bonus : " + salariedEmployee.getBonus() + " Salary : " + salariedEmployee.getSalary());
                                     System.out.println("\n");
                                     currentId++;
@@ -141,7 +147,7 @@ public class Manu {
                                     double rate = scanner.nextDouble();
                                     HourlySalaryEmployee hourlySalaryEmployee = new HourlySalaryEmployee(currentId, name, address, hourWorked, rate);
                                     staffMembers.add(hourlySalaryEmployee);
-                                    System.out.println("Volunteer ID : " + ((HourlySalaryEmployee) staffMembers.get(currentId -1)).getId() + " Name : " + ((HourlySalaryEmployee) staffMembers.get(currentId - 1)).getName() + " Address : " + ((HourlySalaryEmployee) staffMembers.get(currentId - 1)).getAddress() + " Hour Worked : " + ((HourlySalaryEmployee) staffMembers.get(currentId - 1)).getHourWorked() + " Rate : " + ((HourlySalaryEmployee) staffMembers.get(currentId)).getRate());
+                                    System.out.println("Volunteer ID : " + ((HourlySalaryEmployee) staffMembers.get(currentId - 1)).getId() + " Name : " + ((HourlySalaryEmployee) staffMembers.get(currentId - 1)).getName() + " Address : " + ((HourlySalaryEmployee) staffMembers.get(currentId - 1)).getAddress() + " Hour Worked : " + ((HourlySalaryEmployee) staffMembers.get(currentId - 1)).getHourWorked() + " Rate : " + ((HourlySalaryEmployee) staffMembers.get(currentId)).getRate());
                                     System.out.println("\n");
                                     currentId++;
                                     break outer_switch;
@@ -220,7 +226,7 @@ public class Manu {
                             double rate = scanner.nextDouble();
                             HourlySalaryEmployee hourlySalaryEmployee = new HourlySalaryEmployee(id, name, address, hourWorked, rate);
                             staffMembers.set(indexOfId, hourlySalaryEmployee);
-                            System.out.println("Hourly Employee ID : " + ((HourlySalaryEmployee) staffMembers.get(indexOfId)).getId() + " Name : " + ((HourlySalaryEmployee) staffMembers.get(indexOfId)).getName() + " Address : " + ((HourlySalaryEmployee) staffMembers.get(indexOfId)).getAddress() + " Hour Worked : " + ((HourlySalaryEmployee) staffMembers.get(indexOfId)).getHourWorked()+ " Rate : " + ((HourlySalaryEmployee) staffMembers.get(indexOfId)).getRate());
+                            System.out.println("Hourly Employee ID : " + ((HourlySalaryEmployee) staffMembers.get(indexOfId)).getId() + " Name : " + ((HourlySalaryEmployee) staffMembers.get(indexOfId)).getName() + " Address : " + ((HourlySalaryEmployee) staffMembers.get(indexOfId)).getAddress() + " Hour Worked : " + ((HourlySalaryEmployee) staffMembers.get(indexOfId)).getHourWorked() + " Rate : " + ((HourlySalaryEmployee) staffMembers.get(indexOfId)).getRate());
                             System.out.println("\n");
                             break outer_while_loop;
                     }
@@ -242,29 +248,158 @@ public class Manu {
 
         do_while_loop:
         do {
-            Cel
-        }
+            CellStyle numberStyle = new CellStyle(CellStyle.HorizontalAlign.center);
+            Table table = new Table(9, BorderStyle.UNICODE_BOX_DOUBLE_BORDER, ShownBorders.ALL);
+            table.setColumnWidth(0, 3, 5);
+            table.setColumnWidth(1, 20, 26);
+            table.setColumnWidth(2, 30, 26);
+            table.setColumnWidth(3, 20, 26);
+            table.setColumnWidth(4, 10, 26);
+            table.setColumnWidth(1, 20, 26);
+            table.setColumnWidth(2, 30, 26);
+            table.setColumnWidth(3, 20, 26);
+            table.setColumnWidth(4, 10, 26);
+            table.addCell(" Display Employee", numberStyle, (5));
+            table.addCell("Type", numberStyle);
+            table.addCell("ID", numberStyle);
+            table.addCell("Name", numberStyle);
+            table.addCell("Address", numberStyle);
+            table.addCell("Salary", numberStyle);
+            table.addCell("Bonus", numberStyle);
+            table.addCell("Hour", numberStyle);
+            table.addCell("Rate", numberStyle);
+            table.addCell("Pay", numberStyle);
+            if (staffMembers.size() != 0) {
+                for (int i = startPosition; i < row; i++) { // PRINT ROWS
+                    if (i < staffMembers.size()) {
+                        if (staffMembers.get(i).getClass().toString().equals("class Staff.Volunteer")) {// CHECK WHICH BOOK IS AVAILABLE AND ONLY DISPLAY THAT
+                            Volunteer volunteer = (Volunteer) staffMembers.get(i);
+                            table.addCell(staffMembers.get(i).getClass().getSimpleName(), numberStyle);
+                            table.addCell(Integer.toString(volunteer.getId()), numberStyle);
+                            table.addCell(volunteer.getName(), numberStyle);
+                            table.addCell(volunteer.getAddress(), numberStyle);
+                            table.addCell(Double.toString(volunteer.getSalary()), numberStyle);
+                            table.addCell("-----", numberStyle);
+                            table.addCell("-----", numberStyle);
+                            table.addCell("-----", numberStyle);
+                            table.addCell(Double.toString(volunteer.getSalary()), numberStyle);
+                        }
+                    } else {
+                        table.addCell("No Record to Show here", numberStyle, (5));
+                        break;
+                    }
+                }
+                System.out.println(table.render());
+            } else {
+                table.addCell("No Record to Show here", numberStyle, (5));
+                System.out.println(table.render());
+            }
+            System.out.println("1) First Page     2) Next Page     3) Previous     4) Last Page     5) Change display row     6) Go to Main Menu");
+            System.out.println("Choose an option : ");
+            String inputOption = scanner.nextLine();
+            while (validatePagination(inputOption)) {
+                System.out.print("Please input 1-6 : ");
+                inputOption = scanner.nextLine();
+            }
+            int option = Integer.parseInt(inputOption);
+            int totalPage = 0;
+            if (staffMembers.size() != 0) {
+                if (staffMembers.size() % defaultRow == 0) {
+                    totalPage = staffMembers.size() / defaultRow;
+                } else {
+                    float placeHolder = (staffMembers.size() / defaultRow) + 1;
+                    totalPage = (int) placeHolder;
+                }
+            }
+            switch (option) {
+                case 1: // First page
+                    startPosition = 0;
+                    row = defaultRow;
+                    displayEmployee();
+                    break;
+                case 2: // Next page
+                    if (row >= staffMembers.size()) {
+                        System.out.println("There is no next page");
+                        System.out.println("Press any key to continue...");
+                        scanner.nextLine();
+                        break;
+                    } else {
+                        startPosition = pageCount * defaultRow;
+                        pageCount++;
+                        System.out.println(startPosition);
+                        row = pageCount * defaultRow;
+                        break;
+                    }
+                case 3: // Previous page
+                    if (pageCount == 1) {
+                        System.out.println("You are on first page.");
+                        break;
+                    } else {
+//                            System.out.println("It's in prev page");
+                        pageCount--;
+                        System.out.println("Page count " + pageCount);
+                        startPosition = (pageCount - 1) * defaultRow;
+//                            System.out.println("Start Position " + startPosition);
+                        row = pageCount * defaultRow;
+//                            System.out.println("Final Row " + row);
+                        break;
+                    }
+                case 4: // Last page
+                    System.out.println(staffMembers.size());
+                    System.out.println(totalPage);
+                    if (totalPage == 1 || totalPage == 0) {
+                        System.out.println("There's no page 2");
+                        break;
+                    } else {
+                        int placeHolder = staffMembers.size() - (staffMembers.size() % defaultRow);
+                        System.out.println("Place Holder: " + placeHolder);
+                        startPosition = placeHolder;
+                        row = startPosition + row;
+                        break;
+                    }
+                case 5: // Change display row
+                    int inputRow = 0;
+                    while_loop:
+                    while (true) {
+                        try {
+                            System.out.println("Enter How many row you want to display : ");
+                            inputRow = scanner.nextInt();
+                            break while_loop;
+                        } catch (InputMismatchException inputMismatchException) {
+                            System.out.println(inputMismatchException.getMessage());
+                        }
+                    }
+                    row = inputRow;
+                    defaultRow = inputRow;
+                    displayEmployee();
+                    break;
+                case 6: // Main menu
+                    continueShow = false;
+                    startPosition = 0;
+                    row = defaultRow;
+                    mainMenu();
+                    return;
+            }
+        } while (continueShow);
     }
 
     public static void removeEmployee() {
         Scanner scanner = new Scanner(System.in);
 
         out_while_loop:
-        while(true) {
+        while (true) {
             try {
                 System.out.println("==================== Removing Employee ====================");
                 System.out.println("Please input Employee ID you want to delete : ");
                 int idToDelete = scanner.nextInt();
                 int indexOfId = findIndexOfId(idToDelete);
-                if(indexOfId != -1){
+                if (indexOfId != -1) {
                     staffMembers.remove(indexOfId);
                     break out_while_loop;
-                }
-                else {
+                } else {
                     System.err.println("This ID either have no index or out of range!!!");
                 }
-            }
-            catch (Exception e){
+            } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
         }
@@ -282,6 +417,19 @@ public class Manu {
             }
         }
         return -1;
+    }
+
+    public static boolean validatePagination(String text) {// VALIDATE FOR MAIN MENU INPUT WHICH IS 1-6 AS INTEGER TYPE
+        boolean isString = false;
+        int index = 0;
+
+        while (index < text.length()) {
+            if (!(text.charAt(index) >= '1' && text.charAt(index) <= '6')) {
+                isString = true;
+            }
+            index++;
+        }
+        return isString;
     }
 }
 
