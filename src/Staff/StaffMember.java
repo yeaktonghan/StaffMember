@@ -7,13 +7,13 @@ public abstract class StaffMember {
     protected String name;
     protected String address;
 
-    abstract public double getSalary();
+//    abstract public double getSalary();
 
-    abstract public double getBonus();
+//    abstract public double getBonus();
 
-    abstract public int getHourWorked();
+//    abstract public int getHourWorked();
 
-    abstract public double getRate();
+//    abstract public double getRate();
 
     public int getId() {
         return id;
@@ -46,12 +46,5 @@ public abstract class StaffMember {
 
     abstract void setAddress(String address);
 
-    abstract void setSalary(double salary);
-
-    abstract void setBonus(double bonus);
-
-    abstract void setHourWorked(int hourWorked);
-
-    abstract void setRate(double rate);
 
 }

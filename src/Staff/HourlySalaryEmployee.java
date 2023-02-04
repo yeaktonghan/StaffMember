@@ -11,6 +11,22 @@ public class HourlySalaryEmployee extends StaffMember {
         this.rate = rate;
     }
 
+    public int getHourWorked() {
+        return hourWorked;
+    }
+
+    public void setHourWorked(int hourWorked) {
+        this.hourWorked = hourWorked;
+    }
+
+    public double getRate() {
+        return rate;
+    }
+
+    public void setRate(double rate) {
+        this.rate = rate;
+    }
+
     @Override
     void pay(double salary) {
 
@@ -31,49 +47,9 @@ public class HourlySalaryEmployee extends StaffMember {
         this.address = address;
     }
 
-    @Override
-    void setSalary(double salary) {
-        return;
-    }
-
-    @Override
-    void setBonus(double bonus) {
-        return;
-    }
-
-    @Override
-    void setHourWorked(int hourWorked) {
-        this.hourWorked = hourWorked;
-    }
-
-    @Override
-    void setRate(double rate) {
-        this.rate = rate;
-    }
-
-    @Override
-    public double getSalary() {
-        return 0;
-    }
-
-    @Override
-    public double getBonus() {
-        return 0;
-    }
-
-    @Override
-    public int getHourWorked() {
-        return hourWorked;
-    }
-
-    @Override
-    public double getRate() {
-        return rate;
-    }
 
     @Override
     public String toString() {
         return "ID: " + this.id + " Name: " + this.name + " Address: " + this.address + " Hour Worked: " + this.hourWorked + " Rate: " + this.rate;
     }
-
 }

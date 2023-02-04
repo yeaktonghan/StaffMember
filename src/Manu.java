@@ -5,12 +5,11 @@ import Staff.Volunteer;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
-import java.util.List;
 import java.util.Scanner;
 
 public class Manu {
 
-    static int currentIdIndex = 4;
+    static int currentId = 4;
 
     static ArrayList<StaffMember> staffMembers = new ArrayList<>();
 
@@ -76,19 +75,20 @@ public class Manu {
                             while (true) {
                                 try {
                                     System.out.println("==== Inputting Volunteer ====");
-                                    System.out.println("ID : " + currentIdIndex);
+                                    System.out.println("ID : " + Integer.valueOf(currentId).toString());
                                     System.out.print("Name : ");
                                     String name = scanner.nextLine();
                                     System.out.print("Address : ");
                                     String address = scanner.nextLine();
                                     System.out.print("Input Salary : ");
                                     double salary = scanner.nextDouble();
-                                    Volunteer volunteer = new Volunteer(currentIdIndex, name, address, salary);
+                                    Volunteer volunteer = new Volunteer(currentId, name, address, salary);
                                     staffMembers.add(volunteer);
+                                    Volunteer volunteer1 = (Volunteer) staffMembers.get(currentId - 1);
                                     // Time wasted on this exception : 30mn+
-                                    System.out.println("Volunteer ID : " + staffMembers.get(currentIdIndex - 1).getId() + " Name : " + staffMembers.get(currentIdIndex - 1).getName() + " Address : " + staffMembers.get(currentIdIndex - 1).getAddress() + " Salary : " + staffMembers.get(currentIdIndex - 1).getSalary());
+                                    System.out.println("Volunteer ID : " + volunteer1.getId() + " Name : " + volunteer1.getName() + " Address : " + volunteer1.getAddress() + " Salary : " + volunteer1.getSalary());
                                     System.out.println("\n");
-                                    currentIdIndex++;
+                                    currentId++;
                                     break outer_switch;
                                 } catch (Exception e) {
                                     System.err.println(e.getMessage());
@@ -102,7 +102,7 @@ public class Manu {
                             while (true) {
                                 try {
                                     System.out.println("==== Inputting Salaried Employee ====");
-                                    System.out.println("ID : " + currentIdIndex);
+                                    System.out.println("ID : " + currentId);
                                     System.out.print("Name : ");
                                     String name = scanner.nextLine();
                                     System.out.print("Address : ");
@@ -111,11 +111,12 @@ public class Manu {
                                     double salary = scanner.nextDouble();
                                     System.out.print("Input Bonus : ");
                                     double bonus = scanner.nextDouble();
-                                    SalariedEmployee salariedEmployee = new SalariedEmployee(currentIdIndex, name, address, bonus, salary);
+                                    SalariedEmployee salariedEmployee = new SalariedEmployee(currentId, name, address, bonus, salary);
                                     staffMembers.add(salariedEmployee);
-                                    System.out.println("Volunteer ID : " + staffMembers.get(currentIdIndex - 1).getId() + " Name : " + staffMembers.get(currentIdIndex - 1).getName() + " Address : " + staffMembers.get(currentIdIndex - 1).getAddress() + "Bonus : " + staffMembers.get(currentIdIndex - 1).getBonus() + " Salary : " + staffMembers.get(currentIdIndex - 1).getSalary());
+                                    salariedEmployee = (SalariedEmployee) staffMembers.get(currentId -1);
+                                    System.out.println("Volunteer ID : " + salariedEmployee.getId() + " Name : " + salariedEmployee.getName() + " Address : " + salariedEmployee.getAddress() + "Bonus : " + salariedEmployee.getBonus() + " Salary : " + salariedEmployee.getSalary());
                                     System.out.println("\n");
-                                    currentIdIndex++;
+                                    currentId++;
                                     break outer_switch;
                                 } catch (Exception e) {
                                     System.err.println(e.getMessage());
@@ -129,7 +130,7 @@ public class Manu {
                             while (true) {
                                 try {
                                     System.out.println("==== Inputting Hourly Employee ====");
-                                    System.out.println("ID : " + currentIdIndex);
+                                    System.out.println("ID : " + currentId);
                                     System.out.print("Name : ");
                                     String name = scanner.nextLine();
                                     System.out.print("Address : ");
@@ -138,11 +139,11 @@ public class Manu {
                                     int hourWorked = scanner.nextInt();
                                     System.out.print("Input Rate : ");
                                     double rate = scanner.nextDouble();
-                                    HourlySalaryEmployee hourlySalaryEmployee = new HourlySalaryEmployee(currentIdIndex, name, address, hourWorked, rate);
+                                    HourlySalaryEmployee hourlySalaryEmployee = new HourlySalaryEmployee(currentId, name, address, hourWorked, rate);
                                     staffMembers.add(hourlySalaryEmployee);
-                                    System.out.println("Volunteer ID : " + staffMembers.get(currentIdIndex - 1).getId() + " Name : " + staffMembers.get(currentIdIndex - 1).getName() + " Address : " + staffMembers.get(currentIdIndex - 1).getAddress() + " Hour Worked : " + staffMembers.get(currentIdIndex - 1).getHourWorked() + " Rate : " + staffMembers.get(currentIdIndex - 1).getRate());
+                                    System.out.println("Volunteer ID : " + ((HourlySalaryEmployee) staffMembers.get(currentId -1)).getId() + " Name : " + ((HourlySalaryEmployee) staffMembers.get(currentId - 1)).getName() + " Address : " + ((HourlySalaryEmployee) staffMembers.get(currentId - 1)).getAddress() + " Hour Worked : " + ((HourlySalaryEmployee) staffMembers.get(currentId - 1)).getHourWorked() + " Rate : " + ((HourlySalaryEmployee) staffMembers.get(currentId)).getRate());
                                     System.out.println("\n");
-                                    currentIdIndex++;
+                                    currentId++;
                                     break outer_switch;
                                 } catch (Exception e) {
                                     System.err.println(e.getMessage());
@@ -191,7 +192,7 @@ public class Manu {
                             double salary = scanner.nextDouble();
                             Volunteer newVolunteer = new Volunteer(id, name, address, salary);
                             staffMembers.set(indexOfId, newVolunteer);
-                            System.out.println("Volunteer ID : " + staffMembers.get(indexOfId).getId() + " Name : " + staffMembers.get(indexOfId).getName() + " Address : " + staffMembers.get(indexOfId).getAddress() + " Salary : " + staffMembers.get(indexOfId).getSalary());
+                            System.out.println("Volunteer ID : " + ((Volunteer) staffMembers.get(indexOfId)).getId() + " Name : " + ((Volunteer) staffMembers.get(indexOfId)).getName() + " Address : " + ((Volunteer) staffMembers.get(indexOfId)).getAddress() + " Salary : " + ((Volunteer) staffMembers.get(indexOfId)).getSalary());
                             System.out.println("\n");
                             break outer_while_loop;
                         case "class Staff.SalariedEmployee":
@@ -205,7 +206,7 @@ public class Manu {
                             salary = scanner.nextDouble();
                             SalariedEmployee newSalariedEmployee = new SalariedEmployee(id, name, address, bonus, salary);
                             staffMembers.set(indexOfId, newSalariedEmployee);
-                            System.out.println("Volunteer ID : " + staffMembers.get(indexOfId).getId() + " Name : " + staffMembers.get(indexOfId).getName() + " Address : " + staffMembers.get(indexOfId).getAddress() + " Bonus : " + staffMembers.get(indexOfId).getBonus() + " Salary : " + staffMembers.get(indexOfId).getSalary());
+                            System.out.println("Salary Employee ID : " + ((SalariedEmployee) staffMembers.get(indexOfId)).getId() + " Name : " + ((SalariedEmployee) staffMembers.get(indexOfId)).getName() + " Address : " + ((SalariedEmployee) staffMembers.get(indexOfId)).getAddress() + " Salary : " + ((SalariedEmployee) staffMembers.get(indexOfId)).getSalary() + " Bonus : " + ((SalariedEmployee) staffMembers.get(indexOfId)).getBonus());
                             System.out.println("\n");
                             break outer_while_loop;
                         case "class Staff.HourlySalaryEmployee":
@@ -219,7 +220,7 @@ public class Manu {
                             double rate = scanner.nextDouble();
                             HourlySalaryEmployee hourlySalaryEmployee = new HourlySalaryEmployee(id, name, address, hourWorked, rate);
                             staffMembers.set(indexOfId, hourlySalaryEmployee);
-                            System.out.println("Volunteer ID : " + staffMembers.get(indexOfId).getId() + " Name : " + staffMembers.get(indexOfId).getName() + " Address : " + staffMembers.get(indexOfId).getAddress() + " Hour Worked : " + staffMembers.get(indexOfId).getHourWorked() + " Rate : " + staffMembers.get(indexOfId).getRate());
+                            System.out.println("Hourly Employee ID : " + ((HourlySalaryEmployee) staffMembers.get(indexOfId)).getId() + " Name : " + ((HourlySalaryEmployee) staffMembers.get(indexOfId)).getName() + " Address : " + ((HourlySalaryEmployee) staffMembers.get(indexOfId)).getAddress() + " Hour Worked : " + ((HourlySalaryEmployee) staffMembers.get(indexOfId)).getHourWorked()+ " Rate : " + ((HourlySalaryEmployee) staffMembers.get(indexOfId)).getRate());
                             System.out.println("\n");
                             break outer_while_loop;
                     }
@@ -234,7 +235,15 @@ public class Manu {
     }
 
     public static void displayEmployee() {
-        System.out.println(staffMembers.get(0));
+        int startPosition = 0;
+        boolean continueShow = true;
+        int pageCount = 1;
+        Scanner scanner = new Scanner(System.in);
+
+        do_while_loop:
+        do {
+            Cel
+        }
     }
 
     public static void removeEmployee() {

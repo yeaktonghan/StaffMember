@@ -32,45 +32,20 @@ public class SalariedEmployee extends StaffMember {
         this.address = address;
     }
 
-    @Override
-    void setSalary(double salary) {
+    public void setSalary(double salary) {
         this.salary = salary;
     }
 
-    @Override
-    void setBonus(double bonus) {
+    public void setBonus(double bonus) {
         this.bonus = bonus;
     }
 
-    @Override
-    void setHourWorked(int hourWorked) {
-        return;
-    }
-
-    @Override
-    void setRate(double rate) {
-        return;
-    }
-
-
-    @Override
-    public double getSalary() {
+    public double getSalary(){
         return salary;
     }
 
-    @Override
     public double getBonus() {
         return bonus;
-    }
-
-    @Override
-    public int getHourWorked() {
-        return 0;
-    }
-
-    @Override
-    public double getRate() {
-        return 0;
     }
 
     @Override
