@@ -87,6 +87,7 @@ public class Manu {
                                     staffMembers.add(volunteer);
                                     // Time wasted on this exception : 30mn+
                                     System.out.println("Volunteer ID : " + staffMembers.get(currentIdIndex - 1).getId() + " Name : " + staffMembers.get(currentIdIndex - 1).getName() + " Address : " + staffMembers.get(currentIdIndex - 1).getAddress() + " Salary : " + staffMembers.get(currentIdIndex - 1).getSalary());
+                                    System.out.println("\n");
                                     currentIdIndex++;
                                     break outer_switch;
                                 } catch (Exception e) {
@@ -98,9 +99,59 @@ public class Manu {
                                 System.out.println("New volunteer added successfully!!!");
                             }
                         case 2:
-                            System.out.println("Case 2");
+                            while (true) {
+                                try {
+                                    System.out.println("==== Inputting Salaried Employee ====");
+                                    System.out.println("ID : " + currentIdIndex);
+                                    System.out.print("Name : ");
+                                    String name = scanner.nextLine();
+                                    System.out.print("Address : ");
+                                    String address = scanner.nextLine();
+                                    System.out.print("Input Salary : ");
+                                    double salary = scanner.nextDouble();
+                                    System.out.print("Input Bonus : ");
+                                    double bonus = scanner.nextDouble();
+                                    SalariedEmployee salariedEmployee = new SalariedEmployee(currentIdIndex, name, address, bonus,salary);
+                                    staffMembers.add(salariedEmployee);
+                                    System.out.println("Volunteer ID : " + staffMembers.get(currentIdIndex - 1).getId() + " Name : " + staffMembers.get(currentIdIndex - 1).getName() + " Address : " + staffMembers.get(currentIdIndex - 1).getAddress() + "Bonus : " + staffMembers.get(currentIdIndex - 1).getBonus() + " Salary : " + staffMembers.get(currentIdIndex - 1).getSalary());
+                                    System.out.println("\n");
+                                    currentIdIndex++;
+                                    break outer_switch;
+                                } catch (Exception e) {
+                                    System.err.println(e.getMessage());
+                                    System.out.println("Please input correct data type according to field!!!");
+                                    // time wasted on this clear buffer : 6 min
+                                    scanner.nextLine();
+                                }
+                                System.out.println("New volunteer added successfully!!!");
+                            }
                         case 3:
-                            System.out.println("Case 3");
+                            while (true) {
+                                try {
+                                    System.out.println("==== Inputting Hourly Employee ====");
+                                    System.out.println("ID : " + currentIdIndex);
+                                    System.out.print("Name : ");
+                                    String name = scanner.nextLine();
+                                    System.out.print("Address : ");
+                                    String address = scanner.nextLine();
+                                    System.out.print("Input Hour Worked : ");
+                                    int hourWorked = scanner.nextInt();
+                                    System.out.print("Input Rate : ");
+                                    double rate = scanner.nextDouble();
+                                    HourlySalaryEmployee hourlySalaryEmployee = new HourlySalaryEmployee(currentIdIndex, name, address, hourWorked,rate);
+                                    staffMembers.add(hourlySalaryEmployee);
+                                    System.out.println("Volunteer ID : " + staffMembers.get(currentIdIndex - 1).getId() + " Name : " + staffMembers.get(currentIdIndex - 1).getName() + " Address : " + staffMembers.get(currentIdIndex - 1).getAddress() + " Hour Worked : " + staffMembers.get(currentIdIndex - 1).getHourWorked() + " Rate : " + staffMembers.get(currentIdIndex - 1).getRate());
+                                    System.out.println("\n");
+                                    currentIdIndex++;
+                                    break outer_switch;
+                                } catch (Exception e) {
+                                    System.err.println(e.getMessage());
+                                    System.out.println("Please input correct data type according to field!!!");
+                                    // time wasted on this clear buffer : 6 min
+                                    scanner.nextLine();
+                                }
+                                System.out.println("New volunteer added successfully!!!");
+                            }
                         case 4:
                             break outer_while_loop;
                     }
@@ -116,7 +167,65 @@ public class Manu {
     }
 
     public static void updateEmployee() {
-        System.out.println("update");
+        Scanner scanner = new Scanner(System.in);
+
+        outer_while_loop:
+        while(true){
+            try{
+                System.out.println("==================== Update Employee ====================");
+                System.out.println("ID to update : ");
+                int id = scanner.nextInt();
+                scanner.nextLine();
+                String changeThisStaff = staffMembers.get(id-1).getClass().toString();
+
+                switch (changeThisStaff){
+                    case "class Staff.Volunteer":
+                        System.out.println("Change Name to? :");
+                        String name = scanner.nextLine();
+                        System.out.println("Change Address to? :");
+                        String address = scanner.nextLine();
+                        System.out.println("Change Salary to? :");
+                        double salary = scanner.nextDouble();
+                        Volunteer newVolunteer = new Volunteer(id, name, address, salary);
+                        staffMembers.set(id-1, newVolunteer);
+                        System.out.println("Volunteer ID : " + staffMembers.get(id - 1).getId() + " Name : " + staffMembers.get(id - 1).getName() + " Address : " + staffMembers.get(id - 1).getAddress() + " Salary : " + staffMembers.get(id - 1).getSalary());
+                        System.out.println("\n");
+                        break outer_while_loop;
+                    case "class Staff.SalariedEmployee":
+                        System.out.println("Change Name to? :");
+                        name = scanner.nextLine();
+                        System.out.println("Change Address to? :");
+                        address = scanner.nextLine();
+                        System.out.println("Change Bonus to? :");
+                        double bonus = scanner.nextDouble();
+                        System.out.println("Change Salary to? :");
+                        salary = scanner.nextDouble();
+                        SalariedEmployee newSalariedEmployee = new SalariedEmployee(id, name, address, bonus, salary);
+                        staffMembers.set(id-1, newSalariedEmployee);
+                        System.out.println("Volunteer ID : " + staffMembers.get(id - 1).getId() + " Name : " + staffMembers.get(id - 1).getName() + " Address : " + staffMembers.get(id - 1).getAddress() + " Bonus : " + staffMembers.get(id-1).getBonus() + " Salary : " + staffMembers.get(id - 1).getSalary());
+                        System.out.println("\n");
+                        break outer_while_loop;
+                    case "class Staff.HourlySalaryEmployee":
+                        System.out.println("Change Name to? :");
+                        name = scanner.nextLine();
+                        System.out.println("Change Address to? :");
+                        address = scanner.nextLine();
+                        System.out.println("Change Hour Worked to? :");
+                        int hourWorked = scanner.nextInt();
+                        System.out.println("Change Rate to> :");
+                        double rate = scanner.nextDouble();
+                        HourlySalaryEmployee hourlySalaryEmployee = new HourlySalaryEmployee(id, name, address, hourWorked, rate);
+                        staffMembers.set(id-1, hourlySalaryEmployee);
+                        System.out.println("Volunteer ID : " + staffMembers.get(id - 1).getId() + " Name : " + staffMembers.get(id - 1).getName() + " Address : " + staffMembers.get(id - 1).getAddress() + " Hour Worked : " + staffMembers.get(id-1).getHourWorked() + " Rate : " + staffMembers.get(id - 1).getRate());
+                        System.out.println("\n");
+                        break outer_while_loop;
+                }
+            }
+            catch (Exception e){
+                System.err.println(e.getMessage());
+                scanner.nextLine();
+            }
+        }
     }
 
     public static void displayEmployee() {
